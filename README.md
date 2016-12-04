@@ -7,7 +7,7 @@ A public Oxide plugin for [seedery.io](http://seedery.io)'s Rust map generation.
 # Usage
 Just pop `SeederyIoMapGen.cs` in your `plugins` folder, and it'll generate a map.
 
-Check the *Releases* page of for a pre-built version of a simple web server, which allows you to save both the map and monument data (since plugins can't save these directly).
+Check the **Releases** page for a pre-built version of a simple web server, which allows you to save both the map and monument data (since plugins can't save these directly).
 
 Alternatively you can compile it from source, as long as you change the reference paths.
 
