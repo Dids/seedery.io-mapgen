@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace SeederyIo
@@ -10,11 +11,11 @@ namespace SeederyIo
     {
         static void Main(string[] args)
         {
-            WebServer ws = new WebServer();
-            ws.Start();
+            WebServer webServer = new WebServer();
+            webServer?.Start();
             Console.WriteLine("Web server is running. Press any key to quit.");
             Console.ReadKey();
-            ws.Stop();
+            webServer?.Stop();
         }
     }
 }

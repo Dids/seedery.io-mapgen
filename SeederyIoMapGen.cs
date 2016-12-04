@@ -97,18 +97,45 @@ namespace Oxide.Plugins
             float lowestTerrainheight = GetLowestTerrainHeight();
             float highestTerrainHeight = GetHighestTerrainHeight();
 
-            Vector3 terrainStart = TerrainMeta.Terrain.GetPosition(); // -1500
-            Vector3 terrainSize = TerrainMeta.Size; // 3000
-            Vector3 terrainScale = new Vector3(TerrainMeta.Size.x / width, TerrainMeta.Size.y / width, TerrainMeta.Size.z / width); // > 1
+            Vector3 terrainStart = TerrainMeta.Terrain.GetPosition();
+            Vector3 terrainSize = TerrainMeta.Size;
+            Vector3 terrainScale = new Vector3(TerrainMeta.Size.x / width, TerrainMeta.Size.y / width, TerrainMeta.Size.z / width);
 
-            // TODO: Can't seem to figure out how to sample the terrain texture itself,
-            //       so going with just the colormap for now
-
-            // Draw the colormap
-            Texture2D colormapTexture = new Texture2D(width, height);
-            for (int y = 0; y < colormapTexture.height; y++)
+            // Generate a heightmap texture
+            TerrainMeta.HeightMap.GenerateTextures();
+            Texture2D heightmapTexture = TerrainMeta.HeightMap.HeightTexture;
+            Texture2D heightmapNormalTexture = TerrainMeta.HeightMap.NormalTexture;
+            /*Texture2D heightmapTexture = new Texture2D(width, height);
+            for (int y = 0; y < heightmapTexture.height; y++)
             {
-                for (int x = 0; x < colormapTexture.width; x++)
+                for (int x = 0; x < heightmapTexture.width; x++)
+                {
+                    float terrainHeight = _terrain.terrainData.GetHeight(x, y) - lowestTerrainheight;
+                    float currentHeight = terrainHeight / (highestTerrainHeight - lowestTerrainheight);
+
+                    float alpha = currentHeight;
+                    //if (alpha > 0.25f) alpha -= 0.25f;
+
+                    UnityEngine.Color pixelColor = new UnityEngine.Color(currentHeight, currentHeight, currentHeight, 1);
+                    heightmapTexture.SetPixel(x, y, pixelColor);
+                }
+            }
+            heightmapTexture.Apply(true);*/
+
+            // Generate a biome texture
+            TerrainMeta.BiomeMap.GenerateTextures();
+            Texture2D biomemapTexture = TerrainMeta.BiomeMap.BiomeTexture;
+
+            // NOTE: Alpha map seems to contain a black texture, with a white spot where monuments are
+            // Generate an alphamap texture
+            TerrainMeta.AlphaMap.GenerateTextures();
+            Texture2D alphamapTexture = TerrainMeta.AlphaMap.AlphaTexture;
+
+            // Generate the final texture
+            Texture2D finalTexture = new Texture2D(width, height);
+            for (int y = 0; y < finalTexture.height; y++)
+            {
+                for (int x = 0; x < finalTexture.width; x++)
                 {
                     // Mask info
                     /*
@@ -172,19 +199,61 @@ namespace Oxide.Plugins
                     {
                         UnityEngine.Color pixelColor = TerrainMeta.Colors.GetColor(terrainWorldPosition, mask);
                         pixelColor.a = TerrainMeta.AlphaMap.GetAlpha(x, y); // This basically removes little spots all over the map
-                        colormapTexture.SetPixel(x, y, pixelColor);
+                        finalTexture.SetPixel(x, y, pixelColor);
                     }
 
                     // Otherwise just draw a dark water color
                     else
                     {
                         UnityEngine.Color blueColor = new UnityEngine.Color((1f / 255f) * 72f, (1f / 255f) * 61f, (1f / 255f) * 139f, 1);
-                        colormapTexture.SetPixel(x, y, blueColor);
+                        finalTexture.SetPixel(x, y, blueColor);
+                    }
+
+                    // Alpha blend the biomemap with the existing texture
+                    /*if (biomemapTexture != null)
+                    {
+                        var alphaBlendedColor = AlphaBlend(finalTexture.GetPixel(x, y), biomemapTexture.GetPixel(x, y));
+                        finalTexture.SetPixel(x, y, alphaBlendedColor);
+                    }*/
+
+                    // Alpha blend the alphamap with the existing texture
+                    if (alphamapTexture != null)
+                    {
+                        var alphaBlendedColor = AlphaBlend(finalTexture.GetPixel(x, y), alphamapTexture.GetPixel(x, y));
+                        finalTexture.SetPixel(x, y, alphaBlendedColor);
+                    }
+
+                    // Alpha blend the heightmap normal with the existing texture
+                    if (heightmapNormalTexture != null)
+                    {
+                        var finalTextureColor = finalTexture.GetPixel(x, y);
+                        var heightmapNormalTextureColor = heightmapNormalTexture.GetPixel(x, y);
+
+                        /*// Convert the color to HSV
+                        float h, s, v;
+                        Color.RGBToHSV(heightmapNormalTextureColor, out h, out s, out v);
+
+                        // Modify the HSV color to be brighter
+                        h *= 1.0f;
+                        s *= 1.0f;
+                        v *= 1.0f;
+
+                        // Convert it back to RGB
+                        heightmapNormalTextureColor = Color.HSVToRGB(h, s, v);*/
+
+                        //var alphaBlendedColor = AlphaBlend(finalTextureColor, heightmapNormalTextureColor);
+
+                        // Alpha blend the heightmap normal texture color (top) with the final texture color (bottom)
+                        var alphaBlendedColor = AlphaBlend(heightmapNormalTextureColor, finalTextureColor);
+
+                        // Assign the pixel color
+                        finalTexture.SetPixel(x, y, alphaBlendedColor);
                     }
                 }
             }
-            colormapTexture.Apply();
-            return colormapTexture;
+            finalTexture.Apply();
+
+            return finalTexture;
         }
 
         private float GetLowestTerrainHeight()
@@ -223,8 +292,8 @@ namespace Oxide.Plugins
             foreach (var m in monuments)
             {
                 MapMonument monument;
-                monument.X = (int)ConvertWorldToMapCoordinates(m.transform.position.x);
-                monument.Y = (int)ConvertWorldToMapCoordinates(-m.transform.position.z); // Note how we're flipping the Z coordinate (Y in our case)
+                monument.X = (int)ConvertWorldToMapCoordinates(m.transform.position.x, _mapWidth);
+                monument.Y = (int)ConvertWorldToMapCoordinates(-m.transform.position.z, _mapWidth); // Note how we're flipping the Z coordinate (Y in our case)
                 monument.Name = "Unknown";
 
                 if (m.name.ToLower().Contains("lighthouse")) monument.Name = "Lighthouse";
@@ -289,7 +358,7 @@ namespace Oxide.Plugins
         #endregion
 
         #region Utilities
-        private float ConvertWorldToMapCoordinates(float worldPosition)
+        private static float ConvertWorldToMapCoordinates(float worldPosition, int mapWidth)
         {
             // NOTE: I'm assuming the worldPosition starts in the middle of the map, meaning 0,
             //       which is why we're adding half of the map size to it.
@@ -297,8 +366,27 @@ namespace Oxide.Plugins
 
             // At this point, we need to figure out how to convert the position from 0-3000 -> 0-2048
             float scale = realPosition / TerrainMeta.Size.x;
-            float mapPosition = scale * _mapWidth;
+            float mapPosition = scale * mapWidth;
             return mapPosition;
+        }
+
+        private static float BlendSubpixel(float top, float bottom, float alphaTop, float alphaBottom)
+        {
+            return (top * alphaTop) + ((bottom - 1f) * (alphaBottom - alphaTop));
+        }
+
+        private static Color AlphaBlend(Color top, Color bottom)
+        {
+            return new Color(BlendSubpixel(top.r, bottom.r, top.a, bottom.a),
+                             BlendSubpixel(top.g, bottom.g, top.a, bottom.a),
+                             BlendSubpixel(top.b, bottom.b, top.a, bottom.a),
+                             top.a + bottom.a);
+        }
+
+        // TODO: This doesn't seem to work
+        private static Color InvertColor(Color color)
+        {
+            return new Color(1.0f - color.r, 1.0f - color.g, 1.0f - color.b, color.a);
         }
 
         public static void Log(string str)
