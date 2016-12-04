@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26C5B6B5-AEEF-468C-9F1A-54C409C0166B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SeederyIo</RootNamespace>
+    <AssemblyName>SeederyIoMapGen</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SeederyIo.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-UnityScript-firstpass">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Assembly-UnityScript-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave.Unity.Assets">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Behave.Unity.Assets.dll</HintPath>
+    </Reference>
+    <Reference Include="Behave.Unity.Runtime">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Behave.Unity.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ConvexHull">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\ConvexHull.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyAntiCheat.Client">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\EasyAntiCheat.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyAntiCheat.Server">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\EasyAntiCheat.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Console">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Input">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Network">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Raknet">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.Raknet.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Rcon">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.Rcon.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.Steamworks.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.System">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.System.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.UnityEngine">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Facepunch.UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\I18N.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.CJK">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\I18N.CJK.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.MidEast">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\I18N.MidEast.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.Other">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\I18N.Other.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.Rare">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\I18N.Rare.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.West">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\I18N.West.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip.Reduced">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Jint">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="KeraLua">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\KeraLua.dll</HintPath>
+    </Reference>
+    <Reference Include="LZ4n">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\LZ4n.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Core">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Microsoft.Scripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Tds">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Mono.Data.Tds.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Mono.Posix.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLua">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\NLua.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.CSharp">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.JavaScript">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.JavaScript.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.Lua">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.Lua.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.MySql">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.Python">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.Python.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.SQLite">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Core.Unity">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Core.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.RustMapGenerator">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Ext.RustMapGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Game.Rust">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Oxide.Game.Rust.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="Rust.Data">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Rust.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Rust.Global">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Rust.Global.dll</HintPath>
+    </Reference>
+    <Reference Include="Rust.UI">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Rust.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Rust.Workshop">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\Rust.Workshop.dll</HintPath>
+    </Reference>
+    <Reference Include="RustBuild">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\RustBuild.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>..\..\..\..\steamcmd\rust\RustDedicated_Data\Managed\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="SeederyIoMapGen.cs" />
+    <Compile Include="WebServer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY /Y /R  "$(ProjectDir)SeederyIoMapGen.cs" "C:\steamcmd\rust\server\oxide\oxide\plugins"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
